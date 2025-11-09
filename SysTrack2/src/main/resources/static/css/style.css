@@ -1,0 +1,197 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f9ff;
+}
+
+.page-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.navbar {
+    background: linear-gradient(90deg, #004080, #0066cc);
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
+.nav-left a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s, transform 0.2s;
+}
+
+.nav-left a:hover {
+    color: #ffdd57;
+    transform: translateY(-2px);
+}
+
+.logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+.logout-btn {
+    background-color: #d9534f;
+    border: none;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.logout-btn:hover {
+    background-color: #c9302c;
+    transform: scale(1.05);
+}
+
+
+
+
+footer {
+    background: #004080;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 14px;
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.15);
+    width: 100%;
+}
+
+.page-content h2 {
+    color: #00264d;
+    margin-bottom: 20px;
+}
+
+.table-usuarios {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table-usuarios th, .table-usuarios td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.table-usuarios th {
+    background-color: #0059b3;
+    color: white;
+}
+
+.table-usuarios tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-usuarios a, .table-usuarios button {
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.table-usuarios .edit {
+    background-color: #3399ff;
+    color: white;
+}
+
+.table-usuarios .delete {
+    background-color: #cc0000;
+    color: white;
+}
+
+.btn {
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background-color: #3399ff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0059b3;
+}
+
+.btn-danger {
+    background-color: #cc0000;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #990000;
+}
+
+form {
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 200px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #00264d;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+form button {
+    width: 100%;
+    background-color: #0059b3;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+form button:hover {
+    background-color: #3399ff;
+}

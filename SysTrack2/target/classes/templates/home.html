@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Home - SysTrack</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<body>
+
+<!-- Incluir Header -->
+<div th:replace="fragments/header :: header"></div>
+
+<!-- Conteúdo da Home Page -->
+<div class="page-content home-container">
+    <h1>Bem-vindo ao SysTrack</h1>
+
+    <div class="category-container">
+        <!-- Categoria Usuários -->
+        <div class="category-box">
+            <h3>Usuários</h3>
+            <a th:href="@{/usuarios/gerenciar}" sec:authorize="hasRole('ADMIN')">Gerenciar Usuários</a>
+            <a th:href="@{/usuarios/listar}" sec:authorize="hasAnyRole('ADMIN','USER')">Listar Usuários</a>
+        </div>
+
+        <!-- Categoria Pátios -->
+        <div class="category-box">
+            <h3>Pátios</h3>
+            <a th:href="@{/patios/gerenciar}" sec:authorize="hasRole('ADMIN')">Gerenciar Pátios</a>
+            <a th:href="@{/patios/listar}" sec:authorize="hasAnyRole('ADMIN','USER')">Listar Pátios</a>
+        </div>
+
+        <div class="category-box">
+            <h3>Motos</h3>
+            <a th:href="@{/motos/gerenciar}" sec:authorize="hasRole('ADMIN')">Gerenciar Motos</a>
+            <a th:href="@{/motos/listar}" sec:authorize="hasAnyRole('ADMIN','USER')">Listar Motos</a>
+        </div>
+    </div>
+</div>
+
+<!-- Incluir Footer -->
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

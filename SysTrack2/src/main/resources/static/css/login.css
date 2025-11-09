@@ -1,0 +1,84 @@
+/* ================= LOGIN PAGE ================= */
+.login-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* garante que ocupe toda altura da tela */
+    justify-content: center; /* centraliza verticalmente o formulário */
+    align-items: center;     /* centraliza horizontalmente */
+    background: linear-gradient(to bottom right, #e6f2ff, #cce0ff);
+}
+
+/* Container do formulário */
+.login-container {
+    background-color: white;
+    padding: 40px 30px;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Título */
+.login-container h2 {
+    color: #00264d;
+    margin-bottom: 30px;
+    font-size: 26px;
+}
+
+/* Campos do formulário */
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #00264d;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Botão de login */
+.login-container button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: #0059b3;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.login-container button:hover {
+    background-color: #3399ff;
+}
+
+/* Mensagens de erro ou logout */
+.error-message {
+    color: #cc0000;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.logout-message {
+    color: #008000;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+/* Link para cadastro */
+.register-link {
+    margin-top: 20px;
+}
+
+.register-link a {
+    color: #0059b3;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}

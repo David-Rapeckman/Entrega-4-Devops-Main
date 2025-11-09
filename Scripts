@@ -1,0 +1,110 @@
+===== CONFIG GERAIS 
+
+$RG        = "rg-systrack-java"
+$LOC       = "brazilsouth"
+$PLAN      = "plan-systrack-java"
+$APP       = "systrack-java-001"
+$WEB_SKU   = "B1"
+
+====== BANCO DE DADOS 
+
+$SQL_SERVER   = "systrack-sql-001"
+$SQL_DB       = "SysTrackDB"
+$SQL_ADMIN    = "sqladminuser"
+$SQL_PASSWORD = "asuling1i-das7b3"   # se trocar aqui, trocar no portal + appsettings também
+
+===== CAMINHOS LOCAIS 
+
+$DDL_LOCAL = "C:\Vscode\Mottu-java\SysTrack2\script_bd.sql"
+$JAR_LOCAL = "C:\Vscode\Mottu-java\SysTrack2\target\SysTrack2-0.0.1-SNAPSHOT.jar"
+
+
+#Criar Resource Group
+az group create `
+  --name $RG `
+  --location $LOC `
+  -o table
+
+ #Criar App Service Plan
+az appservice plan create `
+  --name $PLAN `
+  --resource-group $RG `
+  --sku $WEB_SKU `
+  --is-linux `
+  -o table
+
+#Criar WebApp Java (Linux, Java 17)
+az webapp create `
+  --resource-group $RG `
+  --plan $PLAN `
+  --name $APP `
+  --runtime "JAVA:17-java17" `
+  -o table
+
+
+#Criar SQL Server
+az sql server create `
+  --name $SQL_SERVER `
+  --resource-group $RG `
+  --location $LOC `
+  --admin-user $SQL_ADMIN `
+  --admin-password $SQL_PASSWORD `
+  -o table
+
+#Criar Database
+az sql db create `
+  --resource-group $RG `
+  --server $SQL_SERVER `
+  --name $SQL_DB `
+  --service-objective S0 `
+  -o table
+
+#Permitir serviços Azure
+az sql server firewall-rule create `
+  --resource-group $RG `
+  --server $SQL_SERVER `
+  --name AllowAzureServices `
+  --start-ip-address 0.0.0.0 `
+  --end-ip-address 0.0.0.0 `
+  -o table
+
+#Permitir seu IP atual
+$MYIP = (Invoke-RestMethod -Uri "https://ifconfig.me").ToString()
+az sql server firewall-rule create `
+  --resource-group $RG `
+  --server $SQL_SERVER `
+  --name AllowMyIP `
+  --start-ip-address $MYIP `
+  --end-ip-address $MYIP `
+  -o table
+
+#sqlcmd `
+  -S "$SQL_SERVER.database.windows.net" `
+  -d $SQL_DB `
+  -U "$SQL_ADMIN@$SQL_SERVER" `
+  -P $SQL_PASSWORD `
+  -i $DDL_LOCAL
+
+
+
+#Criar Configuração do WebApp (env vars pro Spring)
+
+$DB_URL = "jdbc:sqlserver://$SQL_SERVER.database.windows.net:1433;database=$SQL_DB;encrypt=true;trustServerCertificate=false;loginTimeout=30;"
+
+az webapp config appsettings set `
+  --resource-group $RG `
+  --name $APP `
+  --settings `
+    DB_URL="$DB_URL" `
+    DB_USERNAME="$SQL_ADMIN" `
+    DB_PASSWORD="$SQL_PASSWORD" `
+  -o table
+  
+  
+#Depploy
+  az webapp deploy `
+  --resource-group $RG `
+  --name $APP `
+  --src-path $JAR_LOCAL `
+  --type jar `
+  -o table

@@ -1,0 +1,22 @@
+INSERT INTO patio (nome, endereco)
+VALUES
+    ('Pátio Central', 'Rua Principal, 123'),
+    ('Pátio Norte', 'Avenida Norte, 456'),
+    ('Pátio Sul', 'Avenida Sul, 789'),
+    ('Pátio Leste', 'Rua Leste, 321'),
+    ('Pátio Oeste', 'Rua Oeste, 654'),
+    ('Pátio Jardim', 'Rua das Flores, 111'),
+    ('Pátio Industrial', 'Avenida das Indústrias, 222'),
+    ('Pátio Comercial', 'Rua do Comércio, 333'),
+    ('Pátio Parque', 'Avenida do Parque, 444'),
+    ('Pátio Estação', 'Rua da Estação, 555'),
+    ('Pátio Aeroporto', 'Avenida Aeroporto, 666'),
+    ('Pátio Porto', 'Rua do Porto, 777'),
+    ('Pátio Lago', 'Avenida do Lago, 888'),
+    ('Pátio Serra', 'Rua da Serra, 999'),
+    ('Pátio Horizonte', 'Avenida Horizonte, 1010'),
+    ('Pátio Universitário', 'Rua da Universidade, 1111'),
+    ('Pátio Vila Nova', 'Rua Vila Nova, 1212'),
+    ('Pátio Campo Belo', 'Avenida Campo Belo, 1313'),
+    ('Pátio Boa Vista', 'Rua Boa Vista, 1414'),
+    ('Pátio Monte Alto', 'Avenida Monte Alto, 1515');

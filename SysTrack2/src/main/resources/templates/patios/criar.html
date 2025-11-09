@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Pátio - SysTrack</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/patios.css}">
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+<div class="page-content">
+
+    <h1>Cadastrar Novo Pátio</h1>
+
+    <form th:action="@{/patios}" method="post" class="form-container">
+        <div th:if="${erro}" class="error-message" th:text="${erro}"></div>
+
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" th:value="${patio.nome}" required/>
+
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" th:value="${patio.endereco}" required/>
+
+        <button type="submit">Salvar</button>
+    </form>
+
+    <a th:href="@{/patios/gerenciar}" class="back-home">Voltar para Gerenciar Pátios</a>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

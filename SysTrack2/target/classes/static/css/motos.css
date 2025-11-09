@@ -1,0 +1,191 @@
+.page-content {
+    padding: 20px;
+}
+
+.page-content h2 {
+    color: #00264d;
+    margin-bottom: 20px;
+}
+
+.filter-form {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+    background: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    width: auto !important;
+    max-width: 100% !important;
+}
+
+.filter-form .filter-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 120px;
+    flex: 1 1 150px;
+}
+
+.btn-create {
+    display: block;
+    width: 200px;
+    text-align: center;
+    margin: 20px auto;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.btn-create:hover {
+    background-color: #218838;
+}
+
+.filter-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #00264d;
+}
+
+.filter-form input,
+.filter-form select {
+    padding: 8px 10px;
+    border-radius: 5px;
+    border: 1px solid #00264d;
+    font-size: 14px;
+}
+
+.filter-form button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #0059b3;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    height: 42px;
+}
+
+.filter-form button:hover {
+    background-color: #3399ff;
+}
+
+
+/* Tabela de motos (mantida igual) */
+
+.table-motos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.table-motos th, .table-motos td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.table-motos th {
+    background-color: #0059b3;
+    color: white;
+}
+
+.table-motos tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-motos a, .table-motos button {
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.table-motos .edit {
+    background-color: #3399ff;
+    color: white;
+}
+
+.table-motos .edit:hover {
+    background-color: #0059b3;
+}
+
+.table-motos .delete {
+    background-color: #cc0000;
+    color: white;
+}
+
+.table-motos .delete:hover {
+    background-color: #990000;
+}
+
+.back-home {
+    display: block;
+    margin-top: 25px;
+    color: #0059b3;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.back-home:hover {
+    color: #3399ff;
+}
+
+.form-container {
+    max-width: 600px;
+    width: 100%;
+    margin: 30px auto; /* centraliza horizontalmente e adiciona espaço superior */
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* espaço entre os campos */
+}
+
+.form-container label {
+    font-weight: bold;
+    color: #00264d;
+}
+
+.form-container input,
+.form-container select {
+    padding: 12px;
+    border: 1px solid #00264d;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-container button {
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    background-color: #0059b3;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.form-container button:hover {
+    background-color: #3399ff;
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centraliza conteúdo dentro da página */
+    padding: 40px 20px;
+}

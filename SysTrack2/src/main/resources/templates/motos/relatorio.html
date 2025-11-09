@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Motos - SysTrack</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/relatorio.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="page-content">
+
+    <h1>Relatório de Motos por Pátio</h1>
+
+    <div class="form-export-container">
+        <form th:action="@{/motos/relatorio}" method="post">
+            <label for="patio">Escolha o Pátio:</label>
+            <select id="patio" name="patioId" required>
+                <option th:each="patio : ${patios}"
+                        th:value="${patio.id}"
+                        th:text="${patio.nome}"
+                        th:selected="${patio.id} == ${patioSelecionado}"></option>
+            </select>
+            <button type="submit">Gerar Relatório</button>
+        </form>
+    </div>
+    <div th:if="${motosPorStatus != null}">
+        <div th:each="entry : ${motosPorStatus}">
+            <h2 th:text="'Motos ' + ${entry.key}"></h2>
+            <table class="table-motos">
+                <tr>
+                    <th>Placa</th>
+                    <th>Modelo</th>
+                    <th>Ano</th>
+                    <th>Quilometragem</th>
+                    <th>Usuário</th>
+                </tr>
+                <tr th:each="moto : ${entry.value}">
+                    <td th:text="${moto.placa}"></td>
+                    <td th:text="${moto.modelo}"></td>
+                    <td th:text="${moto.ano}"></td>
+                    <td th:text="${moto.quilometragem}"></td>
+                    <td th:text="${moto.nomeUsuario}"></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(entry.value)}">
+                    <td colspan="5">Nenhuma moto neste status</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="form-export-container">
+        <a th:href="@{'/motos/relatorio/csv'(patioId=${patioSelecionado})}"
+           class="btn-export">Exportar CSV</a>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

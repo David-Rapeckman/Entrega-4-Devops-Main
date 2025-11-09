@@ -1,0 +1,67 @@
+/* ================= HOME PAGE ================= */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    min-height: calc(100vh - 140px); /* considera header + footer */
+}
+
+/* Título principal */
+.home-container h1 {
+    text-align: center;
+    color: #00264d;
+    font-size: 28px;
+    margin-bottom: 40px;
+}
+
+/* Container de categorias */
+.category-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+/* Boxes das categorias */
+.category-box {
+    background-color: white;
+    width: 250px;
+    padding: 25px 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.category-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Título das categorias */
+.category-box h3 {
+    color: #0059b3;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+/* Links dentro das categorias */
+.category-box a {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 0;
+    background-color: #0059b3;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.category-box a:hover {
+    background-color: #3399ff;
+    transform: translateY(-2px);
+}

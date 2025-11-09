@@ -1,0 +1,56 @@
+/* =================== HEADER ========================== */
+.navbar {
+    background: linear-gradient(90deg, #004080, #0066cc);
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
+/* Links à esquerda */
+.nav-left a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s, transform 0.2s;
+}
+
+.nav-left a:hover {
+    color: #ffdd57;
+    transform: translateY(-2px);
+}
+
+/* Logo centralizada */
+.logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Logout à direita */
+.logout-btn {
+    background-color: #d9534f;
+    border: none;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.logout-btn:hover {
+    background-color: #c9302c;
+    transform: scale(1.05);
+}

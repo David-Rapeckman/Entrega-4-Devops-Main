@@ -1,0 +1,134 @@
+.page-content h2 {
+    color: #00264d;
+    margin-bottom: 20px;
+}
+
+.table-patios {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table-patios th, .table-patios td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.table-patios th {
+    background-color: #0059b3;
+    color: white;
+}
+
+.table-patios tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-patios a, .table-patios button {
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.table-patios .edit {
+    background-color: #3399ff;
+    color: white;
+}
+
+.table-patios .edit:hover {
+    background-color: #0059b3;
+}
+
+.table-patios .delete {
+    background-color: #cc0000;
+    color: white;
+}
+
+.table-patios .delete:hover {
+    background-color: #990000;
+}
+
+.btn-create {
+    display: block;
+    width: 200px;
+    text-align: center;
+    margin: 20px auto;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.btn-create:hover {
+    background-color: #218838;
+}
+
+.back-home {
+    display: block;
+    margin-top: 25px;
+    color: #0059b3;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.back-home:hover {
+    color: #3399ff;
+}
+.form-container {
+    max-width: 600px; /* aumenta a largura do formulário */
+    width: 100%; /* garante que ocupe até o máximo definido */
+    margin: 0 auto; /* centraliza horizontalmente */
+    background: white;
+    padding: 30px; /* aumenta o padding para ficar mais espaçoso */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #00264d;
+}
+
+.form-container input,
+.form-container select {
+    width: 100%;
+    padding: 12px; /* aumenta o padding para melhor UX */
+    margin-bottom: 20px;
+    border: 1px solid #00264d;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.form-container button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    background-color: #0059b3;
+    color: white;
+    transition: background 0.3s;
+}
+
+.form-container button:hover {
+    background-color: #3399ff;
+}
+
+/* ================= PAGE-CONTENT ================= */
+.page-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centraliza todo o conteúdo */
+    padding: 40px 20px;
+}

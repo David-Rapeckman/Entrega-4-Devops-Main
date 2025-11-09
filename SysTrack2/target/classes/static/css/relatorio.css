@@ -1,0 +1,134 @@
+/* Container principal */
+.page-content {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Título */
+.page-content h1 {
+    text-align: center;
+    color: #333333;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+/* Formulário */
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+form label {
+    font-weight: 600;
+    color: #555555;
+}
+
+form select {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+/* Tabelas */
+.table-motos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.table-motos th,
+.table-motos td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-motos th {
+    background-color: #f5f5f5;
+    font-weight: 600;
+}
+
+.table-motos tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.table-motos tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Cabeçalhos de status */
+.page-content h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #444;
+    font-size: 22px;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 4px;
+}
+
+/* Botão Exportar CSV */
+.btn-export {
+    display: inline-block;
+    background-color: #2196F3;
+    color: white;
+    vertical-align: middle;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-export:hover {
+    background-color: #1976D2;
+}
+
+/* Mensagem "Nenhuma moto neste status" */
+.table-motos td[colspan] {
+    text-align: center;
+    font-style: italic;
+    color: #888;
+    background-color: #f9f9f9;
+}
+
+/* Container do formulário e do botão CSV */
+.form-export-container {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Formulário inline */
+.form-export-container form {
+    display: inline-block;
+    margin-right: 15px; /* espaçamento entre form e botão CSV */
+}
+
+/* Botão Exportar CSV inline */
+.form-export-container .btn-export {
+    display: inline-block;
+    vertical-align: middle;
+}

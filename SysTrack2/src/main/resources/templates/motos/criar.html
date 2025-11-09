@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Moto - SysTrack</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/motos.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="page-content">
+
+    <h1>Adicionar Moto</h1>
+
+    <form th:action="@{/motos}" th:object="${moto}" method="post" class="form-container">
+
+        <div th:if="${erro}" class="alert alert-error" th:text="${erro}"></div>
+
+        <label for="placa">Placa:</label>
+        <input type="text" id="placa" th:field="*{placa}" required/>
+
+        <label for="modelo">Modelo:</label>
+        <input type="text" id="modelo" th:field="*{modelo}" required/>
+
+        <label for="ano">Ano:</label>
+        <input type="number" id="ano" th:field="*{ano}" required min="1900" max="2026"/>
+
+        <label for="quilometragem">Quilometragem (km):</label>
+        <input type="number" id="quilometragem" th:field="*{quilometragem}" required step="0.1" min="0"/>
+
+        <label for="status">Status:</label>
+        <select id="status" th:field="*{status}" required>
+            <option value="FUNCIONAL">Funcional</option>
+            <option value="MANUTENCAO">Manutenção</option>
+        </select>
+
+        <label for="usuario">Usuário:</label>
+        <select id="usuario" th:field="*{usuarioId}" required>
+            <option th:each="usuario : ${usuarios}" th:value="${usuario.id}" th:text="${usuario.nome}"></option>
+        </select>
+
+        <label for="patio">Pátio:</label>
+        <select id="patio" th:field="*{patioId}" required>
+            <option th:each="patio : ${patios}" th:value="${patio.id}" th:text="${patio.nome}"></option>
+        </select>
+
+        <button type="submit">Salvar Moto</button>
+    </form>
+
+    <a th:href="@{/motos/gerenciar}">Voltar para Gerenciar Motos</a>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

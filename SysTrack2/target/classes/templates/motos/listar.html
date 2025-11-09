@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Listar Motos - SysTrack</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/motos.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="page-content">
+    <h2>Listagem de Motos</h2>
+
+    <form th:action="@{/motos/listar}" th:object="${filtro}" method="get" class="filter-form">
+        <div class="filter-group">
+            <label>Modelo:</label>
+            <input type="text" th:field="*{modelo}">
+        </div>
+        <div class="filter-group">
+            <label>Ano:</label>
+            <input type="number" th:field="*{ano}">
+        </div>
+        <div class="filter-group">
+            <label>Quilometragem Exata:</label>
+            <input type="number" th:field="*{quilometragemExata}">
+        </div>
+        <div class="filter-group">
+            <label>Quilometragem Mínima:</label>
+            <input type="number" th:field="*{quilometragemMin}">
+        </div>
+        <div class="filter-group">
+            <label>Quilometragem Máxima:</label>
+            <input type="number" th:field="*{quilometragemMax}">
+        </div>
+        <div class="filter-group">
+            <label>Status:</label>
+            <select th:field="*{status}">
+                <option value="">Todos</option>
+                <option value="FUNCIONAL">FUNCIONAL</option>
+                <option value="MANUTENCAO">MANUTENÇÃO</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
+    </form>
+
+
+    <table class="table-motos">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Placa</th>
+            <th>Modelo</th>
+            <th>Ano</th>
+            <th>Quilometragem</th>
+            <th>Status</th>
+            <th>Usuário</th>
+            <th>Pátio</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="moto : ${motos}">
+            <td th:text="${moto.id}"></td>
+            <td th:text="${moto.placa}"></td>
+            <td th:text="${moto.modelo}"></td>
+            <td th:text="${moto.ano}"></td>
+            <td th:text="${moto.quilometragem}"></td>
+            <td th:text="${moto.status}"></td>
+            <td th:text="${moto.nomeUsuario}"></td>
+            <td th:text="${moto.nomePatio}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/home}" class="back-home">Voltar para Home</a>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>
+

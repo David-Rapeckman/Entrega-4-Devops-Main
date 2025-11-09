@@ -1,8 +1,5 @@
 # infra-webapp.ps1
 # Provisiona toda a infraestrutura no Azure via CLI para o SysTrack2.
-# Requisitos:
-# - az login executado antes
-# - Execução no Azure Cloud Shell ou PowerShell com AZ CLI instalado
 
 param(
     [string]$Location         = "brazilsouth",
@@ -49,16 +46,27 @@ if (-not $planJson) {
     Write-Host "    App Service Plan já existe. Reutilizando."
 }
 
-# Descobrir runtime Java 17
+# Descobrir runtime Java 17 (case-insensitive, mais robusto)
 Write-Host "==> Obtendo runtime Java 17 suportado para Linux..."
-$javaRuntime = az webapp list-runtimes --os-type linux `
-    --query "[?contains(@, 'JAVA') && contains(@, '17')][0]" -o tsv
+$runtimes = az webapp list-runtimes --os-type linux -o tsv 2>$null
 
-if (-not $javaRuntime) {
-    Write-Error "Runtime Java 17 não encontrado. Rode 'az webapp list-runtimes --os-type linux' manualmente e ajuste neste script."
+if (-not $runtimes) {
+    Write-Error "Não foi possível obter a lista de runtimes. Verifique se o Azure CLI está atualizado."
     exit 1
 }
 
+$javaRuntime = $runtimes |
+    Where-Object { $_ -match "(?i)java" -and $_ -match "17" } |
+    Select-Object -First 1
+
+if (-not $javaRuntime) {
+    Write-Error "Runtime Java 17 não encontrado na lista. Rode 'az webapp list-runtimes --os-type linux -o table' para conferir o nome exato e ajuste manualmente neste script na variável `$javaRuntime`."
+    Write-Host "Lista de runtimes disponíveis:"
+    Write-Host $runtimes
+    exit 1
+}
+
+$javaRuntime = $javaRuntime.Trim()
 Write-Host "    Usando runtime: $javaRuntime"
 
 # Web App

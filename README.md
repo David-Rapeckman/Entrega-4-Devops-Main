@@ -1,229 +1,152 @@
-# 🚀 SysTrack - Deploy no Azure
+## 🎯 Visão Geral
 
-Integrantes (Nome completo e RM)
-Gustavo Rangel — RM 559168
-💼 Estudante de Análise e Desenvolvimento de Sistemas na FIAP
-🔗 https://linkedin.com/in/gustavoorangel
-
-David Rapeckman — RM 556607
-💼 Estudante de Análise e Desenvolvimento de Sistemas na FIAP
-🔗 https://linkedin.com/in/davidrapeckman
-
-Luis Felippe Morais — RM 558127
-💼 Estudante de Análise e Desenvolvimento de Sistemas na FIAP
-🔗 https://linkedin.com/in/luis-felippe-morais-das-neves-16219b2b9
-
-Curso: FIAP – Análise e Desenvolvimento de Sistemas
-Disciplina/Entrega: Devops and Cloud Computing
+O **SysTrack** é um sistema desenvolvido em **Java Spring Boot**, integrado a um **banco de dados Azure SQL** e publicado automaticamente em um **Azure App Service (Linux)** via **pipeline CI/CD no Azure DevOps**.  
+O objetivo do projeto foi demonstrar a automação completa do ciclo de desenvolvimento e deploy utilizando práticas de **DevOps**.
 
 
-[![Java](https://img.shields.io/badge/Java-17-red)](https://www.oracle.com/java/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.0-brightgreen)](https://spring.io/projects/spring-boot)
-[![Azure](https://img.shields.io/badge/Azure-App%20Service-blue)](https://azure.microsoft.com/)
-[![SQL Server](https://img.shields.io/badge/Database-SQL%20Server-lightgrey)](https://azure.microsoft.com/services/sql-database/)
+Teste
+---
 
-Este repositório contém as instruções completas para **deploy** da aplicação **SysTrack** no **Azure App Service** com integração ao **Azure SQL Database**.  
-Inclui também seções para **testes** e **validação** do ambiente.
+## 🧩 Estrutura do Projeto
 
-
-
-# 🎯 Visão da Solução
-
-Nossa solução tem como objetivo integrar visão computacional às câmeras dos estacionamentos da Mottu, permitindo que o sistema identifique motos automaticamente em tempo real. Através dessa integração, o sistema é capaz de:
-
-Reconhecer placas e características visuais únicas das motos.
-
-Provisionar uma velocidade de verificação que assegure agilidade sem comprometer a precisão.
-
-Diferenciar modelos e estados das motos (ativas, paradas, em manutenção).
-
-Gerar alertas automáticos para irregularidades (ex.: moto fora do pátio, estacionamento indevido).
-
-Consolidar as informações em um painel de monitoramento unificado, otimizando a gestão dos pátios.
-
-Essa abordagem não só aumenta a eficiência operacional, mas também reduz erros humanos, amplia a segurança das filiais e prepara o sistema para futuras integrações com IoT e telemetria em tempo real.
+**Tecnologias e Ferramentas Utilizadas:**
+- **Java 17 (Spring Boot 3)**
+- **Maven** (build e empacotamento)
+- **Azure CLI & PowerShell** (provisionamento de infraestrutura)
+- **Azure DevOps Pipelines** (CI/CD)
+- **Azure App Service (Linux, B1 Plan)**
+- **Azure SQL Database**
+- **GitHub / Azure Repos** (versionamento de código)
+- **Thymeleaf** (templates HTML)
+- **BCrypt** (segurança e autenticação)
 
 ---
 
-## 📂 Estrutura do Repositório
+## ⚙️ Infraestrutura no Azure
 
-- `README.md` → Guia de deploy e testes.
-- `docs/` → Documentação auxiliar.
+Toda a infraestrutura foi criada de forma automatizada com scripts PowerShell:
 
----
+| Script | Função |
+|--------|--------|
+| **infra-webapp.ps1** | Cria o grupo de recursos, App Service Plan (Linux), Web App e banco de dados SQL. |
+| **config-webapp.ps1** | Configura as variáveis de ambiente (connection strings e App Settings). |
+| **deploy-jar.ps1** | Realiza o deploy do arquivo `.jar` gerado para o App Service. |
 
-## ⚙️ Configurações Principais
-
-Defina as variáveis de ambiente:
-
-```bash
-# Configurações gerais
-RG="rg-systrack-java"
-LOC="brazilsouth"
-PLAN="plan-systrack-java"
-APP="systrack-java-001"
-WEB_SKU="B1"
-
-# Banco de dados
-SQL_SERVER="systrack-sql-001"
-SQL_DB="SysTrackDB"
-SQL_ADMIN="sqladminuser"
-SQL_PASSWORD="asuling1i-das7b3"
-
-# Caminhos locais
-DDL_LOCAL="/Users/mylenasena/Entrega-3-Devops/SysTrack2/Full_schema.sql"
-JAR_LOCAL="/Users/mylenasena/Entrega-3-Devops/SysTrack2/target/SysTrack2-0.0.1-SNAPSHOT.jar"
-```
+**Recursos criados no Azure:**
+- **Resource Group:** `rg-systrack`
+- **App Service Plan:** `asp-systrack-linux`
+- **App Service:** `systrack-webapp-david001`
+- **Azure SQL Server:** `systracksqlsrvdavid001`
+- **Banco de Dados:** `systrackdb`
 
 ---
 
-## 📦 Provisionamento de Recursos
+## 🧱 Build e Empacotamento (CI)
 
-### Criar Resource Group
-```bash
-az group create -n "$RG" -l "$LOC" -o table
-```
+O **Continuous Integration (CI)** foi configurado com **Maven** para compilar e empacotar o projeto em um `.jar`.
 
-### Criar App Service Plan
-```bash
-az appservice plan create \
-  --name "$PLAN" \
-  --resource-group "$RG" \
-  --sku "$WEB_SKU" \
-  -o table
-```
+### 🔧 Pipeline de Build (SysTrack - DevOps)
+1. **Get Sources:** clona o repositório do projeto.
+2. **Maven Build:** executa: clean package -DskipTests
+   
+   Isso gera o artefato `SysTrack2-0.0.1-SNAPSHOT.jar` dentro da pasta `target/`.
+3. **Copy Files:** copia o `.jar` para a pasta de staging.
+4. **Publish Artifact:** publica o artefato `drop` para uso na Release Pipeline.
 
-### Criar WebApp Java
-```bash
-az webapp create \
-  --resource-group "$RG" \
-  --plan "$PLAN" \
-  --name "$APP" \
-  --runtime "JAVA:17" \
-  -o table
-```
+📁 **Artefato final:**  
+`SysTrack2/target/SysTrack2-0.0.1-SNAPSHOT.jar`
 
 ---
 
-## 🗄️ Banco de Dados SQL
+## 🚀 Deploy Automatizado (CD)
 
-### Criar SQL Server
-```bash
-az sql server create \
-  --name "$SQL_SERVER" \
-  --resource-group "$RG" \
-  --location "$LOC" \
-  --admin-user "$SQL_ADMIN" \
-  --admin-password "$SQL_PASSWORD" \
-  -o table
-```
+A segunda etapa do pipeline é o **Continuous Deployment (CD)**.
 
-### Criar Database
-```bash
-az sql db create \
-  --resource-group "$RG" \
-  --server "$SQL_SERVER" \
-  --name "$SQL_DB" \
-  --service-objective S0 \
-  -o table
-```
+### 🔁 Release Pipeline
+1. **Download Artifacts:** obtém o `.jar` gerado no build.
+2. **Deploy Azure App Service:**
+- **Tipo:** Web App on Linux  
+- **Nome:** `systrack-webapp-david001`
+- **Subscription:** Azure for Students  
+- **Conexão:** Azure Resource Manager
 
-### Liberar Firewall & IPs
-```bash
-# Permitir apps dentro do Azure
-az sql server firewall-rule create \
-  --resource-group "$RG" \
-  --server "$SQL_SERVER" \
-  --name AllowAzureServices \
-  --start-ip-address 0.0.0.0 \
-  --end-ip-address 0.0.0.0 \
-  -o table
-
-# Permitir IP atual
-MYIP=$(curl -s ifconfig.me -4)
-az sql server firewall-rule create \
-  --resource-group "$RG" \
-  --server "$SQL_SERVER" \
-  --name AllowMyIP \
-  --start-ip-address $MYIP \
-  --end-ip-address $MYIP \
-  -o table
-```
-
-### Executar Script de Criação do Schema
-```bash
-sqlcmd -S $SQL_SERVER.database.windows.net \
-  -d $SQL_DB \
-  -U ${SQL_ADMIN}@${SQL_SERVER} \
-  -P $SQL_PASSWORD \
-  -i $DDL_LOCAL
-```
+### 🧩 Resultado
+O artefato `.jar` é publicado automaticamente no App Service e executado em ambiente Linux.  
+A aplicação fica disponível via navegador público no endpoint do App Service.
 
 ---
 
-## 🔗 Configuração do WebApp
+## 🧠 Lógica do Sistema
 
-### Definir Connection String
-```bash
-DB_URL="jdbc:sqlserver://$SQL_SERVER.database.windows.net:1433;database=$SQL_DB"
+O sistema implementa controle de usuários, pátios e motos, com autenticação via **Spring Security + BCrypt** e perfis **ADMIN / USER**.
 
-az webapp config connection-string set \
-  --resource-group "$RG" \
-  --name "$APP" \
-  --settings DefaultConnection="$DB_URL" \
-  --connection-string-type SQLAzure \
-  -o table
-```
-
-### Definir Comando de Startup
-```bash
-az webapp config set \
-  --resource-group "$RG" \
-  --name "$APP" \
-  --startup-file "java -jar /home/site/wwwroot/SysTrack2-0.0.1-SNAPSHOT.jar"
-```
+**Principais pacotes:**
+- `controller/` → controladores MVC (Login, Moto, Pátio, Usuário)
+- `service/` → regras de negócio
+- `repository/` → interfaces JPA
+- `dto/` → objetos de transferência de dados
+- `config/` → segurança (classe `SecurityConfig`)
+- `db/migration/` → scripts Flyway de criação e carga inicial
 
 ---
 
-## 🚢 Deploy da Aplicação
+## 🔒 Segurança e Autenticação
 
-> Antes do deploy, execute na pasta onde esta o java e o db:
+O login é gerenciado via **Spring Security**, com:
+- Autenticação por e-mail e senha.
+- Roles (`USER`, `ADMIN`) controlando permissões.
+- Redirecionamento seguro pós-login.
+- Criptografia de senha com BCrypt.
+
+O usuário **admin** pode realizar operações CRUD em motos, usuários e pátios diretamente via interface web.
+
+---
+
+## 💾 Banco de Dados (Azure SQL)
+
+Banco relacional hospedado no Azure SQL, contendo as tabelas:
+
+| Tabela | Descrição |
+|--------|------------|
+| `usuario` | Controle de acesso e papéis do sistema |
+| `patio` | Cadastro dos pátios monitorados |
+| `moto` | Registro de motos associadas a usuários e pátios |
+
+**Script principal:** `script_bd.sql`  
+**Script de atualização de admin:** `update_admin.sql`
+
+---
+
+## 🔍 Testes Locais e Validação
+
+Para testes locais:
 ```bash
 mvn clean package -DskipTests
-```
+java -jar target/SysTrack2-0.0.1-SNAPSHOT.jar
 
-### Realizar Deploy do .jar
-```bash
-az webapp deploy \
-  --resource-group "$RG" \
-  --name "$APP" \
-  --src-path "$JAR_LOCAL" \
-  --type jar \
-  -o table
-```
+Para subir novamente no Azure:
 
----
+`.\infra-webapp.ps1 .\config-webapp.ps1 .\deploy-jar.ps1`
 
-## ✅ Testes e Validação
+## 📊 Resultados e Conclusão
 
-Após o deploy:
+- ✅ **Integração contínua (CI)** configurada com sucesso via Maven.
+    
+- ✅ **Deploy contínuo (CD)** automatizado com Azure DevOps + App Service.
+    
+- ✅ **Banco Azure SQL** conectado e funcional.
+    
+- ✅ **Ambiente escalável e versionado** pronto para evolução.
+    
 
-1. **Acessar aplicação**  
-   👉 [https://systrack-java-001.azurewebsites.net/login](https://systrack-java-001.azurewebsites.net/login)
-
-2. **Testar conexão com banco**  
-   - Login com credenciais cadastradas.  
-   - Criar e consultar registros no sistema.  
-
-3. **Logs da aplicação**
-   ```bash
-   az webapp log tail --resource-group "$RG" --name "$APP"
-   ```
+O projeto SysTrack demonstra o ciclo completo de entrega contínua — desde o código-fonte até a aplicação rodando em ambiente cloud totalmente automatizado.
 
 ---
 
-## 🔮 Próximos Passos
+## 👨‍💻 Autoria
 
-- Configurar **CI/CD** com GitHub Actions ou Azure DevOps.  
-- Habilitar **monitoramento** com Azure Monitor e Application Insights.  
-- Escalar App Service para produção (`P1v2` ou superior).  
+**David Gomes**  
+RM 556607 – FIAP  
+**Disciplina:** DevOps Tools & Cloud Computing  
+**Professor:** PF Karlinhos
+**Ano:** 2025
